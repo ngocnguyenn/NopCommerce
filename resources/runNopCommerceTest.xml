@@ -13,13 +13,7 @@
   <test name="Run on Chrome">
   	<parameter name = "browser" value = "chrome"/>
     		<classes>
-      			<class name="learn.nopcommerce.user.Level_23_Browser_Factory"/>
-    		</classes>
-  </test> <!-- Test -->
-  <test name="Run on Firefox">
-  	<parameter name = "browser" value = "firefox"/>
-    		<classes>
-      			<class name="learn.nopcommerce.user.Level_23_Browser_Factory"/>
+      			<class name="user.Register"/>
     		</classes>
   </test> <!-- Test -->
 
