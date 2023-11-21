@@ -3,6 +3,7 @@ package pageObjects.NopCommerce.User;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import commons.PageGeneratorManager;
 import pageUIsNopCommerceUser.UserRegisterPageUI;
 
 public class UserRegisterPageObject extends BasePage{
@@ -12,9 +13,10 @@ public class UserRegisterPageObject extends BasePage{
 	{
 		this.driver = driver;
 	}
-	public void clickToRegisterButton() {
+	public UserHomePageObject clickToRegisterButton() {
 		waitForElementClickable(driver, UserRegisterPageUI.REGISTER_BUTTON);
 		clickToElement(driver, UserRegisterPageUI.REGISTER_BUTTON);
+		return PageGeneratorManager.getUserHomePageObject(driver);
 	}
 	public String getFirstNameErrorMessage()
 	{

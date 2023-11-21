@@ -14,6 +14,8 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 
 import commons.BaseTest;
+import learn.nopcommerce.data.UserData;
+import learn.nopcommerce.data.UserDataMapper;
 import pageFactoryNopCommerce.RegisterPageObject;
 import pageObjects.NopCommerce.User.UserHomePageObject;
 import pageObjects.NopCommerce.User.UserRegisterPageObject;
@@ -25,14 +27,13 @@ public class Register extends BaseTest{
 	private UserRegisterPageObject registerPage;
 	private String firstName = "automation";
 	private String lastName = "test";
-	private String email = firstName + lastName + getRandomNumber() + "@gmail.com";
-	private String password = "12345678";
+	private String email = UserDataMapper.getUserData().getEmail();
+	private String password = UserDataMapper.getUserData().getPassWord();
 	
 	@Parameters({"envName", "serverName", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
 	@BeforeClass
 	public void beforeClass(@Optional("local") String envName, @Optional("dev") String serverName, @Optional("chrome") String browserName, @Optional("localhost") String ipAddress, @Optional("4444") String portNumber, @Optional("Windows") String osName, @Optional("10") String osVersion) {
 		driver = getBrowserDriver(envName, serverName, browserName, ipAddress, portNumber, osName, osVersion);
-		
 		homePage = new UserHomePageObject(driver);
 		registerPage = new UserRegisterPageObject(driver);
 	}
@@ -118,8 +119,6 @@ public class Register extends BaseTest{
 		
 		ExtentTestManager.getTest().log(Status.INFO, "Register - Step 08: Verify Register successful message is displayed");
 		Assert.assertEquals(registerPage.getSuccessMessageText(), "Your registration completed");
-		
-		
 	}
 	@Test 
 	public void TC_04_Register_With_Exists_Email(Method method)
