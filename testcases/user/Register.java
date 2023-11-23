@@ -25,8 +25,8 @@ public class Register extends BaseTest{
 	private WebDriver driver;
 	private UserHomePageObject homePage;
 	private UserRegisterPageObject registerPage;
-	private String firstName = "automation";
-	private String lastName = "test";
+	private String firstName = UserDataMapper.getUserData().getFirstName();
+	private String lastName = UserDataMapper.getUserData().getLastName();
 	private String email = UserDataMapper.getUserData().getEmail();
 	private String password = UserDataMapper.getUserData().getPassWord();
 	

@@ -20,14 +20,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.NopCommerce.User.UserHomePageObject;
 import pageUIsJQueryScript.BasePageUI;
+import pageUIsNopCommerceUser.UserBasePageUI;
+import pageUIsNopCommerceUser.UserChangePasswordPageUI;
 
 public class BasePage {
 	public static BasePage getBasePageObject()
 	{
 		return new BasePage();
 	}
+	public void openPageAtMyAccountByPageName(WebDriver driver, String pageName)
+	{
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LOCATOR_LINK, pageName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_LOCATOR_LINK, pageName);
+	}
 	
+	public UserHomePageObject clickToLogOutLink(WebDriver driver) {
+		waitForElementClickable(driver, UserBasePageUI.LOGOUT_LINK);
+		clickToElement(driver, UserBasePageUI.LOGOUT_LINK);
+		return PageGeneratorManager.getUserHomePageObject(driver); 
+	}
 	public void openPageUrl(WebDriver driver, String pageUrl)
 	{
 		driver.get(pageUrl);

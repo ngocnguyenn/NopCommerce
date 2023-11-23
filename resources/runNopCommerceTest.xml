@@ -15,6 +15,7 @@
     		<classes>
 				<class name="user.Register"/>
       			<class name="user.Login"/>
+      			<class name="user.MyAccount"/>
     		</classes>
   </test> <!-- Test -->
 
