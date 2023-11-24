@@ -257,25 +257,23 @@ public class BasePage {
 	protected void selectIteminCustomDropdown(WebDriver driver, String parentXpath, String childXpath, String expectedTextItem)
     {
         
-        getElement(driver, parentXpath).click();
-        sleepInSecond(2);
-        
-        WebDriverWait explicitWait = new WebDriverWait(driver, 30);
-        
+		getElement(driver, parentXpath).click();
+		sleepInSecond(2);
 
-        List<WebElement> allItems = explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXpath(childXpath)));
+		WebDriverWait explicitWait = new WebDriverWait(driver, 30);
 
-        for (WebElement item: allItems)
-        {
-            if (item.getText().trim().equals(expectedTextItem))
-            {
-            	JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-            	jsExecutor.executeScript("argument[0].scrollIntoView(true);", item);
-            	sleepInSecond(1);
-                item.click();
-                break;
-            }
-        }
+		List<WebElement> allItems = explicitWait
+				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childXpath)));
+
+		for (WebElement item : allItems) {
+			if (item.getText().trim().equals(expectedTextItem)) {
+				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				sleepInSecond(1);
+				item.click();
+				break;
+			}
+		}
 
     }
 	
