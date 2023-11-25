@@ -43,5 +43,10 @@ public class UserHomePageObject extends BasePage{
 		clickToElement(driver, UserHomePageUI.SEARCH_LINK);
 		return PageGeneratorManager.getUserSearchPageObject(driver);
 	}
+	public UserListComputerPageObject clickToComputerLink() {
+		waitForElementClickable(driver, UserHomePageUI.MENU_COMPUTER_LINK);
+		clickToElement(driver, UserHomePageUI.MENU_COMPUTER_LINK);
+		return PageGeneratorManager.getUserListComputerPageObject(driver);
+	}
 
 }

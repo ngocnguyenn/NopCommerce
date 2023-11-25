@@ -7,6 +7,8 @@ import pageObjects.NopCommerce.User.UserAddressesPageObject;
 import pageObjects.NopCommerce.User.UserChangePasswordPageObject;
 import pageObjects.NopCommerce.User.UserCustomerInforPageObject;
 import pageObjects.NopCommerce.User.UserHomePageObject;
+import pageObjects.NopCommerce.User.UserListComputerPageObject;
+import pageObjects.NopCommerce.User.UserListDesktopsPageObject;
 import pageObjects.NopCommerce.User.UserLoginPageObject;
 import pageObjects.NopCommerce.User.UserProductDetailPageObject;
 import pageObjects.NopCommerce.User.UserProductReviewPageObject;
@@ -47,5 +49,11 @@ public class PageGeneratorManager {
 	}
 	public static UserSearchPageObject getUserSearchPageObject(WebDriver driver) {
 		return new UserSearchPageObject(driver);
+	}
+	public static UserListComputerPageObject getUserListComputerPageObject(WebDriver driver) {
+		return new UserListComputerPageObject(driver);
+	}
+	public static UserListDesktopsPageObject getUserListDesktopsPageObject(WebDriver driver) {
+		return new UserListDesktopsPageObject(driver);
 	}
 }

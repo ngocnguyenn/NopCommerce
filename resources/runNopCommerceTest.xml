@@ -13,9 +13,7 @@
   <test name="Run on Chrome">
   	<parameter name = "browser" value = "chrome"/>
     		<classes>
-				<class name="user.Register"/>
-      			<class name="user.Login"/>
-      			<class name="user.Search"/>
+      			<class name="user.Sort_Data"/>
     		</classes>
   </test> <!-- Test -->
 
