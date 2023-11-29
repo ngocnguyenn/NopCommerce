@@ -17,5 +17,10 @@ public class UserProductDetailPageObject extends BasePage{
 		clickToElement(driver, UserProductDetailPageUI.ADD_REVIEW_LINK);
 		return PageGeneratorManager.getUserProductReviewPageObject(driver);
 	}
+	public UserWishListPageObject clickToAddWishListButton() {
+		waitForElementClickable(driver, UserProductDetailPageUI.ADD_WISHLIST_BUTTON);
+		clickToElement(driver, UserProductDetailPageUI.ADD_WISHLIST_BUTTON);
+		return PageGeneratorManager.getUserWishListPageObject(driver);
+	}
 
 }

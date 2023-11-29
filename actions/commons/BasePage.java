@@ -21,9 +21,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageObjects.NopCommerce.User.UserHomePageObject;
+import pageObjects.NopCommerce.User.UserWishListPageObject;
 import pageUIsJQueryScript.BasePageUI;
 import pageUIsNopCommerceUser.UserBasePageUI;
 import pageUIsNopCommerceUser.UserChangePasswordPageUI;
+import utilities.PropertiesConfig;
 
 public class BasePage {
 	public static BasePage getBasePageObject()
@@ -35,11 +37,30 @@ public class BasePage {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LOCATOR_LINK, pageName);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_LOCATOR_LINK, pageName);
 	}
-	
+	public void clickToCloseMessageButton(WebDriver driver) {
+		waitForElementClickable(driver, UserBasePageUI.CLOSE_MESSAGE_BUTTON);
+		clickToElement(driver, UserBasePageUI.CLOSE_MESSAGE_BUTTON);
+	}
+	public String getSuccessMessageText(WebDriver driver)
+	{
+		waitForElementVisible(driver, UserBasePageUI.SUCCESS_MESSAGE_BAR);
+		return getElementText(driver,  UserBasePageUI.SUCCESS_MESSAGE_BAR);
+	}
 	public UserHomePageObject clickToLogOutLink(WebDriver driver) {
 		waitForElementClickable(driver, UserBasePageUI.LOGOUT_LINK);
 		clickToElement(driver, UserBasePageUI.LOGOUT_LINK);
 		return PageGeneratorManager.getUserHomePageObject(driver); 
+	}
+	public UserWishListPageObject clickToWishListLinkFromHeader(WebDriver driver) {
+		waitForElementClickable(driver, UserBasePageUI.WISHLIST_LINK_FROM_HEADER);
+		clickToElement(driver, UserBasePageUI.WISHLIST_LINK_FROM_HEADER);
+		return PageGeneratorManager.getUserWishListPageObject(driver); 
+	}
+	public UserHomePageObject clickToLogoImage(WebDriver driver)
+	{
+		waitForElementClickable(driver, UserBasePageUI.LOGO_IMAGE);
+		clickToElement(driver,  UserBasePageUI.LOGO_IMAGE);
+		return PageGeneratorManager.getUserHomePageObject(driver);
 	}
 	public void openPageUrl(WebDriver driver, String pageUrl)
 	{
@@ -182,6 +203,11 @@ public class BasePage {
 	
 	private WebElement getElement (WebDriver driver, String locatorType)
 	{
+		return driver.findElement(getByLocator(locatorType));
+	}
+	public WebElement getElement (WebDriver driver, String locatorType, String...dynamicValues)
+	{
+		locatorType = String.format(locatorType, (Object[]) dynamicValues);
 		return driver.findElement(getByLocator(locatorType));
 	}
 	
@@ -336,9 +362,9 @@ public class BasePage {
 		return getElement(driver, locatorType).isDisplayed();
 	}
 	public boolean isElementUndisplayed(WebDriver driver, String locatorType) {
-		overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getShortTimeout());
+		overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getShortTimeout());
 		List<WebElement> elements = getElements(driver, locatorType);
-		overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getLongTimeout());
+		overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getLongTimeout());
 		if(elements.size()==0)
 		{
 			return true;
@@ -349,9 +375,9 @@ public class BasePage {
 	}
 	public boolean isElementUndisplayed(WebDriver driver, String locatorType, String...dynamicValues) {
 		locatorType = String.format(locatorType,(Object[]) dynamicValues);
-		overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getShortTimeout());
+		overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getShortTimeout());
 		List<WebElement> elements = getElements(driver, locatorType);
-		overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getLongTimeout());
+		overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getLongTimeout());
 		if(elements.size()==0)
 		{
 			return true;
@@ -461,6 +487,12 @@ public class BasePage {
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getElement(driver, locatorType));
     }
 
+    protected void scrollToElementOnDown(WebDriver driver, String locatorType, String...dynamicValues) {
+    	locatorType = String.format(locatorType,(Object[]) dynamicValues);
+    	JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(false);", getElement(driver, locatorType));
+    }
+
     protected void scrollToElementOnDown(WebDriver driver, String locatorType) {
     	JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(false);", getElement(driver, locatorType));
@@ -504,9 +536,9 @@ public class BasePage {
     protected void waitForElementUndisplayed(WebDriver driver, String locatorType)
     {
     	WebDriverWait explicitWait = new WebDriverWait(driver, longTimeOut);
-    	overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getShortTimeout());
+    	overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getShortTimeout());
     	explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locatorType)));
-    	overrideGlobalTimeout(driver, GlobalConstants.getGloabalConstant().getLongTimeout());
+    	overrideGlobalTimeout(driver, PropertiesConfig.getFileConfigReader().getLongTimeout());
     }
     protected void waitForElementVisible(WebDriver driver, String locatorType)
     {
@@ -574,6 +606,6 @@ public class BasePage {
             e.printStackTrace();
         }
     }
-    private long longTimeOut = GlobalConstants.getGloabalConstant().getLongTimeout();
+    private long longTimeOut = PropertiesConfig.getFileConfigReader().getLongTimeout();
 }
 

@@ -33,9 +33,10 @@ public class UserHomePageObject extends BasePage{
 		clickToElement(driver, UserHomePageUI.MY_ACCOUNT_LINK);
 		return PageGeneratorManager.getUserCustomerInforPageObject(driver);
 	}
-	public UserProductDetailPageObject clickToProductLink() {
-		waitForElementClickable(driver, UserHomePageUI.PRODUCT_DETAIL_LINK);
-		clickToElement(driver, UserHomePageUI.PRODUCT_DETAIL_LINK);
+	public UserProductDetailPageObject clickToProductByName(String productName) {
+		scrollToElementOnDown(driver,UserHomePageUI.PRODUCT_DETAIL_LINK, productName);
+		waitForElementClickable(driver, UserHomePageUI.PRODUCT_DETAIL_LINK, productName);
+		clickToElement(driver, UserHomePageUI.PRODUCT_DETAIL_LINK, productName);
 		return PageGeneratorManager.getUserProductDetailPageObject(driver);
 	}
 	public UserSearchPageObject clickToSearchLink() {
@@ -48,5 +49,21 @@ public class UserHomePageObject extends BasePage{
 		clickToElement(driver, UserHomePageUI.MENU_COMPUTER_LINK);
 		return PageGeneratorManager.getUserListComputerPageObject(driver);
 	}
+	public UserComparePageObject clickToCompareLink(WebDriver driver) {
+		waitForElementClickable(driver, UserHomePageUI.COMPARE_LINK);
+		clickToElement(driver,UserHomePageUI.COMPARE_LINK);
+		return PageGeneratorManager.getUserComparePageObject(driver);
+	}
+	public void clickToAddCompareListByTitle(String productTitle) {
+		sleepInSecond(2);
+		waitForElementClickable(driver, UserHomePageUI.COMPARE_BUTTON, productTitle);
+		clickToElement(driver,UserHomePageUI.COMPARE_BUTTON, productTitle);
+	}
+	public UserRecentlyViewProductsPageObject clickToRecentlyViewProductLink(WebDriver driver) {
+		waitForElementClickable(driver, UserHomePageUI.RECENTLY_VIEW_PRODUCTS_LINK);
+		clickToElement(driver, UserHomePageUI.RECENTLY_VIEW_PRODUCTS_LINK);
+		return PageGeneratorManager.getUserRecentlyViewProductsPageObject(driver);
+	}
+	
 
 }

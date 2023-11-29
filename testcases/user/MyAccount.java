@@ -217,7 +217,7 @@ public class MyAccount extends BaseTest {
 		Assert.assertEquals(changePasswordPage.getSuccessMessageText(), "Password was changed");
 
 		ExtentTestManager.getTest().log(Status.INFO, "Change Password - Step 07: Click to Close success message");
-		changePasswordPage.clickToClosePasswordButton();
+		changePasswordPage.clickToCloseMessageButton(driver);
 
 		ExtentTestManager.getTest().log(Status.INFO, "Change Password - Step 08: Click to Logout Link");
 		changePasswordPage.clickToLogOutLink(driver);
@@ -258,7 +258,7 @@ public class MyAccount extends BaseTest {
 	{
 		ExtentTestManager.startTest(method.getName(), "Add Review");
 		ExtentTestManager.getTest().log(Status.INFO, "Add Review - Step 01: Click to Product Link");
-		productDetailPage = homePage.clickToProductLink();
+		productDetailPage = homePage.clickToProductByName("Build your own computer");
 		
 		ExtentTestManager.getTest().log(Status.INFO, "Add Review - Step 02: Click to Add review");
 		productReviewPage = productDetailPage.clickToAddReviewLink();

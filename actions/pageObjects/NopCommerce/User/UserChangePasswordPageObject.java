@@ -31,8 +31,4 @@ public class UserChangePasswordPageObject extends BasePage{
 		waitForElementVisible(driver, UserChangePasswordPageUI.SUCCESS_MESSAGE);
 		return getElementText(driver,UserChangePasswordPageUI.SUCCESS_MESSAGE);
 	}
-	public void clickToClosePasswordButton() {
-		waitForElementClickable(driver, UserChangePasswordPageUI.CLOSE_MESSAGE_BUTTON);
-		clickToElement(driver, UserChangePasswordPageUI.CLOSE_MESSAGE_BUTTON);
-	}
 }
