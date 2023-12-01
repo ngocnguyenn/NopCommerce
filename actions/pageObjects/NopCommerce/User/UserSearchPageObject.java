@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import commons.BasePage;
+import commons.PageGeneratorManager;
+import pageUIsNopCommerceUser.UserHomePageUI;
 import pageUIsNopCommerceUser.UserSearchPageUI;
 
 public class UserSearchPageObject extends BasePage{
@@ -62,6 +64,11 @@ public class UserSearchPageObject extends BasePage{
 	public void selectItemInManufacturerDropDown(String string) {
 		waitForElementVisible(driver, UserSearchPageUI.MANUFACTURER_DROPDOWN);
 		selectIteminCustomDropdown(driver, UserSearchPageUI.MANUFACTURER_DROPDOWN, UserSearchPageUI.MANUFACTURER_DROPDOWN_OPTION, string);
+	}
+	public UserProductDetailPageObject clickToProductByName(String productTitle) {
+		waitForElementClickable(driver, UserSearchPageUI.PRODUCT_DETAIL_LINK, productTitle);
+		clickToElement(driver, UserSearchPageUI.PRODUCT_DETAIL_LINK, productTitle);
+		return PageGeneratorManager.getUserProductDetailPageObject(driver);
 	}
 	
 }

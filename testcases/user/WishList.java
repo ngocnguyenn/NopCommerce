@@ -49,7 +49,6 @@ public class WishList extends BaseTest{
 		lastName = UserDataMapper.getUserData().getLastName();
 		
 		homePage = new UserHomePageObject(driver);
-		loginPage = new UserLoginPageObject(driver);
 		
 		loginPage = homePage.clickToLoginLink();
 		loginPage.enterToEmailTextbox(email);

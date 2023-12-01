@@ -7,4 +7,5 @@ public class UserBasePageUI {
 	public static final String SUCCESS_MESSAGE_BAR = "xpath=//div[@class='bar-notification success']//p";
 	public static final String WISHLIST_LINK_FROM_HEADER = "xpath=//a[@class='ico-wishlist']";
 	public static final String LOGO_IMAGE = "xpath=//div[@class='header-logo']//img";
+	public static final String SHOPPING_CART_LINK = "xpath=//a[@class='ico-cart']";
 }

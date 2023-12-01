@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageObjects.NopCommerce.User.UserHomePageObject;
+import pageObjects.NopCommerce.User.UserShoppingCartPageObject;
 import pageObjects.NopCommerce.User.UserWishListPageObject;
 import pageUIsJQueryScript.BasePageUI;
 import pageUIsNopCommerceUser.UserBasePageUI;
@@ -50,6 +51,11 @@ public class BasePage {
 		waitForElementClickable(driver, UserBasePageUI.LOGOUT_LINK);
 		clickToElement(driver, UserBasePageUI.LOGOUT_LINK);
 		return PageGeneratorManager.getUserHomePageObject(driver); 
+	}
+	public UserShoppingCartPageObject clickToShoppingCartLink(WebDriver driver) {
+		waitForElementClickable(driver, UserBasePageUI.SHOPPING_CART_LINK);
+		clickToElement(driver, UserBasePageUI.SHOPPING_CART_LINK);
+		return PageGeneratorManager.getUserShoppingCartPageObject(driver); 
 	}
 	public UserWishListPageObject clickToWishListLinkFromHeader(WebDriver driver) {
 		waitForElementClickable(driver, UserBasePageUI.WISHLIST_LINK_FROM_HEADER);
@@ -302,7 +308,29 @@ public class BasePage {
 		}
 
     }
-	
+	protected void selectIteminCustomDropdown(WebDriver driver, String parentXpath, String childXpath, String expectedTextItem, String...dynamicValues)
+    {
+		parentXpath = String.format(parentXpath,(Object[]) dynamicValues);
+		childXpath = String.format(childXpath,(Object[]) dynamicValues);
+		getElement(driver, parentXpath).click();
+		sleepInSecond(2);
+
+		WebDriverWait explicitWait = new WebDriverWait(driver, 30);
+
+		List<WebElement> allItems = explicitWait
+				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(childXpath)));
+
+		for (WebElement item : allItems) {
+			if (item.getText().trim().equals(expectedTextItem)) {
+				JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				sleepInSecond(1);
+				item.click();
+				break;
+			}
+		}
+
+    }
 	
 	protected String getElementAttribute(WebDriver driver, String locatorType, String attributeName)
 	{
@@ -351,6 +379,15 @@ public class BasePage {
 	}
 	protected void uncheckToDefaultCheckbox(WebDriver driver, String locatorType)
 	{
+		WebElement element = getElement(driver, locatorType);
+		if (element.isSelected())
+		{
+			element.click();
+		}
+	}
+	protected void uncheckToDefaultCheckbox(WebDriver driver, String locatorType,String...dynamicValues)
+	{
+		locatorType = String.format(locatorType,(Object[]) dynamicValues);
 		WebElement element = getElement(driver, locatorType);
 		if (element.isSelected())
 		{

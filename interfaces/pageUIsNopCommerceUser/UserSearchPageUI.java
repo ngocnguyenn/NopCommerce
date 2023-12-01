@@ -13,5 +13,6 @@ public class UserSearchPageUI {
 	public static final String SUB_CATEGORIES_CHECKBOX = "xpath=//input[@id='isc']";
 	public static final String MANUFACTURER_DROPDOWN = "xpath=//select[@id='mid']";
 	public static final String MANUFACTURER_DROPDOWN_OPTION = "xpath=//select[@id='mid']/option";
+	public static final String PRODUCT_DETAIL_LINK = "xpath=//div[@class='item-grid']//a[text()='%s']";
 
 }
