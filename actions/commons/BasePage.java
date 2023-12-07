@@ -221,7 +221,11 @@ public class BasePage {
 	{
 		return driver.findElements(getByLocator(locatorType));
 	}
-	
+	public List<WebElement> getElements (WebDriver driver, String locatorType, String...dynamicValues)
+	{
+		locatorType = String.format(locatorType,(Object[]) dynamicValues);
+		return driver.findElements(getByLocator(locatorType));
+	}
 	protected void clickToElement(WebDriver driver, String locatorType)
 	{
 		getElement(driver, locatorType).click();

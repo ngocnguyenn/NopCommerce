@@ -21,6 +21,12 @@ public class UserDataMapper {
 	@JsonProperty("email")
 	private String email;
 	
+	@JsonProperty("admin_email")
+	private String emailAdmin;
+	
+	@JsonProperty("admin_password")
+	private String passwordAdmin;
+	
 	public static UserDataMapper getUserData()
 	{
 		try {
@@ -45,5 +51,11 @@ public class UserDataMapper {
 	}
 	public String getEmail() {
 		return email;
+	}
+	public String getAdminEmail() {
+		return emailAdmin;
+	}
+	public String getAdminPassword() {
+		return passwordAdmin;
 	}
 }

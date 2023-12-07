@@ -280,7 +280,7 @@ public class BaseTest{
 			envUrl = "https://demo.nopcommerce.com/";
 		} else if (envList == EnvironmentList.TEST)
 		{
-			envUrl = "https://demo.nopcommerce.com/";
+			envUrl = "https://admin-demo.nopcommerce.com/login?ReturnUrl=/admin/";
 		}
 		return envUrl;
 	}

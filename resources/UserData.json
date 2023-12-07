@@ -2,5 +2,7 @@
 	"firstname": "automation",
 	"lastname": "FC",
 	"password": "12345678",
-	"email": "automation10@gmail.com"
+	"email": "automation10@gmail.com",
+	"admin_email": "admin@yourstore.com",
+	"admin_password" : "admin"
 }

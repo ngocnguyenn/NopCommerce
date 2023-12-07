@@ -9,12 +9,11 @@
     <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
   </listeners>
 	<paramter name = "envName" value = "local"/>
-	<parameter name = "serverName" value = "dev"/>
+	<parameter name = "serverName" value = "test"/>
   <test name="Run on Chrome">
   	<parameter name = "browser" value = "chrome"/>
     		<classes>
-				<class name="user.Register"/>
-      			<class name="user.Order"/>
+				<class name="admin.Search_Products"/>
     		</classes>
   </test> <!-- Test -->
 
