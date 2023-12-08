@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import commons.BasePage;
+import commons.PageGeneratorManager;
 import pageUIsNopCommerceAdmin.AdminProductPageUI;
 
 public class AdminProductsPageObject extends BasePage {
@@ -48,6 +49,15 @@ public class AdminProductsPageObject extends BasePage {
 	public void selectItemInManufacturerDropDownByItem(String string) {
 		waitForElementVisible(driver, AdminProductPageUI.MANUFACTURER_DROPDOWN);
 		selectIteminCustomDropdown(driver, AdminProductPageUI.MANUFACTURER_DROPDOWN, AdminProductPageUI.MANUFACTURER_OPTION, string);
+	}
+	public void enterToSKUTextbox(String string) {
+		waitForElementVisible(driver, AdminProductPageUI.SKU_TEXTBOX);
+		sendKeyToElement(driver, AdminProductPageUI.SKU_TEXTBOX, string);
+	}
+	public AdminProductDetailPageObject clickToGoButton(WebDriver driver) {
+		waitForElementClickable(driver, AdminProductPageUI.GO_BUTTON);
+		clickToElement(driver, AdminProductPageUI.GO_BUTTON);
+		return PageGeneratorManager.getAdminProductDetailPageObject(driver);
 	}
 
 }

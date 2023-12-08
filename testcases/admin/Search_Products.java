@@ -17,6 +17,7 @@ import commons.PageGeneratorManager;
 import learn.nopcommerce.data.UserDataMapper;
 import pageObjects.NopCommerce.Admin.AdminDashboardPageObject;
 import pageObjects.NopCommerce.Admin.AdminLoginPageObject;
+import pageObjects.NopCommerce.Admin.AdminProductDetailPageObject;
 import pageObjects.NopCommerce.Admin.AdminProductsPageObject;
 import reportConfigs.ExtentTestManager;
 
@@ -25,6 +26,7 @@ public class Search_Products extends BaseTest{
 	private AdminLoginPageObject loginPage;
 	private AdminDashboardPageObject dashboardPage;
 	private AdminProductsPageObject productsPage;
+	private AdminProductDetailPageObject productDetailPage;
 	private String email, password, productName;
 	@Parameters({"envName", "serverName", "browser", "ipAddress", "portNumber", "osName", "osVersion"})
 	@BeforeClass
@@ -144,6 +146,24 @@ public class Search_Products extends BaseTest{
 		
 		ExtentTestManager.getTest().log(Status.INFO, "Search with product name and manufacturer  - Step 07: Verify No data message is displayed");
 		Assert.assertEquals(productsPage.getNoDataMessageText(),"No data available in table");
+	}
+	
+	@Test
+	public void TC_06_Go_Directly_to_Product_SKU(Method method)
+	{
+		ExtentTestManager.startTest(method.getName(), "Go directly to product SKU");
+		ExtentTestManager.getTest().log(Status.INFO, "Go directly to product SKU - Step 01: Enter to Search Textbox");
+		productsPage.enterToSKUTextbox("LE_IC_600");
+		
+		ExtentTestManager.getTest().log(Status.INFO, "Go directly to product SKU - Step 02: Click to Search button");
+		productDetailPage = productsPage.clickToGoButton(driver);
+		
+		ExtentTestManager.getTest().log(Status.INFO, "Search with product name and manufacturer  - Step 07: Verify No data message is displayed");
+		Assert.assertTrue(productDetailPage.getProductDetailTitle(productName));
+		
+		ExtentTestManager.getTest().log(Status.INFO, "Search with product name and manufacturer  - Step 07: Verify No data message is displayed");
+		Assert.assertEquals(productDetailPage.getProductNameValue("value"),productName);
+		
 	}
 	
 	@AfterClass(alwaysRun = true)
